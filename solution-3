@@ -1,0 +1,44 @@
+create database bookdb;
+create table bookdb.books(
+book_id int primary key,
+title varchar(20),
+year int,
+price int);
+
+create table bookdb.authors(
+auth_id int primary key,
+name varchar(20),
+age int,
+book_id int,
+foreign key(book_id) references books(book_id)
+);
+
+insert into bookdb.books values
+(1,'A time to kill',1862,1000),
+(2,'East of eden',1952,1200),
+(3,'House of mirth',1905,1300),
+(4,'vile bodies',1930,1400),
+(5,'scanner darkly',1977,1500);
+
+insert into bookdb.authors values
+(1,'john grisham',56,2),
+(2,'john steinbeck',64,3),
+(3,'edith wharton',45,1),
+(4,'evelyn waugh',58,5),
+(5,'philip k.dick',67,4);
+
+select * from bookdb.books;
+
+select * from bookdb.authors;
+
+select * from bookdb.books where title='House of mirth';
+
+update bookdb.books set price=900 where title='vile bodies';
+
+delete from bookdb.books where title='scanner darkly';
+
+select avg(price) from bookdb.books;
+
+select books.title,authors.name from bookdb.books
+join bookdb.authors 
+on bookdb.books.book_id=bookdb.authors.book_id;
